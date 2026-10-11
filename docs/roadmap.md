@@ -5,15 +5,15 @@ The open work is tracked in the private GitHub project. The parent issue is
 
 | Issue | Work | Current state |
 | --- | --- | --- |
-| [#2](https://github.com/radiationnss/wiggy/issues/2) | Remove manual terminal and arbitrary shell execution | Implemented in this change; close after checks and push |
-| [#3](https://github.com/radiationnss/wiggy/issues/3) | Choose and build a seamless Linux installer | Arch `.pkg.tar.zst` selected; recipe and CI install smoke check added; clean desktop acceptance remains |
+| [#2](https://github.com/radiationnss/wiggy/issues/2) | Remove manual terminal and arbitrary shell execution | Closed after tests and push |
+| [#3](https://github.com/radiationnss/wiggy/issues/3) | Build and accept the selected private Arch package | CI build/install/uninstall passed; clean desktop first-launch and upgrade acceptance remain |
 | [#4](https://github.com/radiationnss/wiggy/issues/4) | User-controlled startup at login | Planned |
 | [#5](https://github.com/radiationnss/wiggy/issues/5) | Local voice input after mouse summon | Planned; local recognizer evaluation required |
 | [#6](https://github.com/radiationnss/wiggy/issues/6) | Existing-login, app-server safety, and data review | Open release gate |
 | [#7](https://github.com/radiationnss/wiggy/issues/7) | Settings readability and keyboard accessibility | Open; native visual review required |
 | [#8](https://github.com/radiationnss/wiggy/issues/8) | Screenshot and chat native acceptance | Live text chat smoke passed; image inference and native capture acceptance remain open |
 | [#9](https://github.com/radiationnss/wiggy/issues/9) | Optional reusable personas, separate from GPT model | Planned |
-| [#10](https://github.com/radiationnss/wiggy/issues/10) | Tracked docs and production release checks | Docs updated here; close after checks and push |
+| [#10](https://github.com/radiationnss/wiggy/issues/10) | Tracked docs and production release checks | Closed after docs, workflows, and CI checks passed |
 
 ## Decisions already made
 

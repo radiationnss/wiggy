@@ -39,8 +39,8 @@ the source of truth for outstanding production work; see
 Local verification: 19 frontend tests passed; 35 Rust tests passed and one
 screen-capture test remained ignored because it requires explicit live screen
 capture approval. Frontend build, Rust formatting, Clippy, and the native
-release build passed. The Arch package built locally and its extracted binary
-and desktop entry passed smoke checks. The package CI workflow will perform a
-clean dependency install and pacman install/uninstall check after push. A
+release build passed. The first GitHub push also passed the full Linux verify
+workflow and the Arch package build/install/diagnose/uninstall workflow; the
+private `.pkg.tar.zst` artifact was uploaded with 14-day retention. A
 one-message app-server chat smoke test returned a completed reply through the
 existing login.
