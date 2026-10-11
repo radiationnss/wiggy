@@ -1,0 +1,6 @@
+{
+  "identifier": "palette",
+  "description": "Local palette events for chat, screenshots, settings, and popup control.",
+  "windows": ["palette"],
+  "permissions": ["core:event:allow-listen", "core:event:allow-unlisten"]
+}

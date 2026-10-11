@@ -1,0 +1,44 @@
+name: Arch package
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    container: archlinux:base-devel
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and install-test the Arch package
+        shell: bash
+        run: |
+          set -euo pipefail
+          pacman -Syu --noconfirm --needed nodejs npm rust webkit2gtk-4.1 gtk3 libappindicator librsvg pkgconf desktop-file-utils
+          useradd --create-home builder
+          chown -R builder:builder "$GITHUB_WORKSPACE"
+          runuser -u builder -- bash -c 'cd "$1" && makepkg --noconfirm' _ "$GITHUB_WORKSPACE"
+          package="$(find "$GITHUB_WORKSPACE" -maxdepth 1 -type f -name 'wiggy-*.pkg.tar.zst' -print -quit)"
+          test -n "$package"
+          pacman -U --noconfirm "$package"
+          test -x /usr/bin/wiggy
+          desktop-file-validate /usr/share/applications/wiggy.desktop
+          pacman -Qo /usr/bin/wiggy
+          /usr/bin/wiggy --diagnose
+          pacman -R --noconfirm wiggy
+          test ! -e /usr/bin/wiggy
+          mkdir -p "$GITHUB_WORKSPACE/artifacts"
+          cp "$package" "$GITHUB_WORKSPACE/artifacts/"
+          chown -R builder:builder "$GITHUB_WORKSPACE/artifacts"
+      - uses: actions/upload-artifact@v4
+        if: github.event_name != 'pull_request'
+        with:
+          name: wiggy-arch-x86_64
+          path: artifacts/*.pkg.tar.zst
+          if-no-files-found: error
+          retention-days: 14

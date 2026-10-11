@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Wiggy
+Comment=Mouse-triggered desktop chat palette
+Exec=/usr/bin/wiggy --toggle
+Icon=wiggy
+Terminal=false
+Categories=Utility;
+StartupNotify=false
