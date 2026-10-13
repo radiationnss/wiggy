@@ -1,12 +1,12 @@
 # Production roadmap
 
-The open work is tracked in the private GitHub project. The parent issue is
+The open work is tracked in the public GitHub repository. The parent issue is
 [Production readiness roadmap](https://github.com/radiationnss/wiggy/issues/1).
 
 | Issue | Work | Current state |
 | --- | --- | --- |
 | [#2](https://github.com/radiationnss/wiggy/issues/2) | Remove manual terminal and arbitrary shell execution | Closed after tests and push |
-| [#3](https://github.com/radiationnss/wiggy/issues/3) | Build and accept the selected private Arch package | CI build/install/uninstall passed; clean desktop first-launch and upgrade acceptance remain |
+| [#3](https://github.com/radiationnss/wiggy/issues/3) | Build and accept the Arch package | CI build/install/uninstall passed; clean desktop first-launch and upgrade acceptance remain |
 | [#4](https://github.com/radiationnss/wiggy/issues/4) | User-controlled startup at login | Planned |
 | [#5](https://github.com/radiationnss/wiggy/issues/5) | Local voice input after mouse summon | Planned; local recognizer evaluation required |
 | [#6](https://github.com/radiationnss/wiggy/issues/6) | Existing-login, app-server safety, and data review | Open release gate |
@@ -28,12 +28,11 @@ The open work is tracked in the private GitHub project. The parent issue is
 
 ## Decisions and remaining release gates
 
-The first release path is a native Arch `.pkg.tar.zst` built by private GitHub
-Actions. This keeps the source and CI artifact within the private repository;
-it is not a public AUR package. Local installation is available with
-`makepkg -si` from a private checkout. The package registers a desktop launcher
-and icon without enabling login startup.
+The current public download is a temporary GitHub Actions artifact containing
+the native Arch `.pkg.tar.zst` package and its checksum. A version tag builds a
+draft GitHub Release for maintainer review; no release has been published yet.
+The package registers a desktop launcher and icon without enabling login
+startup. There is no AUR recipe.
 
-Broader distribution also needs the maintainer to choose a project license and
-complete the app-server/account-policy review before publishing outside this
-private repository.
+Broader distribution still needs the maintainer to choose a project license
+and complete the app-server/account-policy review before publishing a release.

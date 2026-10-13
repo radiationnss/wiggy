@@ -2,6 +2,7 @@ name: Arch package
 on:
   push:
     branches: [main]
+    tags: ['v*']
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -25,6 +26,10 @@ jobs:
           runuser -u builder -- bash -c 'cd "$1" && makepkg --noconfirm' _ "$GITHUB_WORKSPACE"
           package="$(find "$GITHUB_WORKSPACE" -maxdepth 1 -type f -name 'wiggy-*.pkg.tar.zst' -print -quit)"
           test -n "$package"
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            package_version="$(sed -n 's/^pkgver=//p' PKGBUILD)"
+            test "${GITHUB_REF_NAME#v}" = "$package_version"
+          fi
           pacman -U --noconfirm "$package"
           test -x /usr/bin/wiggy
           desktop-file-validate /usr/share/applications/wiggy.desktop
@@ -34,11 +39,42 @@ jobs:
           test ! -e /usr/bin/wiggy
           mkdir -p "$GITHUB_WORKSPACE/artifacts"
           cp "$package" "$GITHUB_WORKSPACE/artifacts/"
+          (cd "$GITHUB_WORKSPACE/artifacts" && sha256sum wiggy-*.pkg.tar.zst > SHA256SUMS)
           chown -R builder:builder "$GITHUB_WORKSPACE/artifacts"
       - uses: actions/upload-artifact@v4
         if: github.event_name != 'pull_request'
         with:
           name: wiggy-arch-x86_64
-          path: artifacts/*.pkg.tar.zst
+          path: artifacts/*
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 90
+
+  draft-release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: package
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: wiggy-arch-x86_64
+          path: artifacts
+      - name: Create a draft release for review
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat > release-notes.md <<'EOF'
+          Arch Linux x86_64 package for Hyprland 0.55/0.56.
+
+          Requires a running Codex app-server with an active ChatGPT login. See the repository README for installation and first-launch steps.
+
+          This release is created as a draft so the maintainer can review the package and notes before publishing.
+          EOF
+          package="$(find artifacts -maxdepth 1 -type f -name 'wiggy-*.pkg.tar.zst' -print -quit)"
+          test -n "$package"
+          gh release create "$GITHUB_REF_NAME" \
+            --draft \
+            --title "Wiggy $GITHUB_REF_NAME" \
+            --notes-file release-notes.md \
+            "$package" artifacts/SHA256SUMS

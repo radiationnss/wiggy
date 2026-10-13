@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10161c"/>
+      <stop offset="1" stop-color="#080a0d"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e0a34b"/>
+      <stop offset="1" stop-color="#4c9eff"/>
+    </linearGradient>
+    <filter id="soft-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="34"/>
+    </filter>
+    <clipPath id="screen">
+      <rect x="626" y="194" width="576" height="216" rx="14"/>
+    </clipPath>
+  </defs>
+  <rect width="1280" height="640" fill="url(#wash)"/>
+  <circle cx="1112" cy="137" r="250" fill="#1d5b8d" opacity=".16" filter="url(#soft-glow)"/>
+  <circle cx="375" cy="585" r="220" fill="#9c6330" opacity=".12" filter="url(#soft-glow)"/>
+  <path d="M0 512 C245 448 421 621 666 552 S1073 450 1280 525 V640 H0Z" fill="#0d1115" opacity=".8"/>
+  <path d="M72 82 h52 v52 h-52z" rx="12" fill="#141311" stroke="#323334"/>
+  <path d="m81 96 6 27h7l5-16 5 16h7l7-27h-8l-4 18-5-18h-5l-5 18-4-18z" fill="#e0a34b"/>
+  <text x="143" y="113" fill="#f2f4f5" font-family="sans-serif" font-size="26" font-weight="700" letter-spacing=".3">Wiggy</text>
+  <text x="74" y="208" fill="#e0a34b" font-family="monospace" font-size="15" font-weight="700" letter-spacing="2">A CHAT PALETTE FOR HYPRLAND</text>
+  <text x="72" y="302" fill="#f2f4f5" font-family="sans-serif" font-size="74" font-weight="700" letter-spacing="-2">Wiggle.</text>
+  <text x="72" y="382" fill="#f2f4f5" font-family="sans-serif" font-size="74" font-weight="700" letter-spacing="-2">Ask.</text>
+  <text x="76" y="443" fill="#aeb8c2" font-family="sans-serif" font-size="23">Keep your current work in view.</text>
+  <rect x="74" y="493" width="328" height="3" rx="1.5" fill="url(#edge)"/>
+  <text x="74" y="542" fill="#c0c8cf" font-family="monospace" font-size="15" letter-spacing="1.2">RUST  /  TAURI  /  REACT  /  HYPRLAND</text>
+  <rect x="600" y="168" width="628" height="272" rx="24" fill="#000000" opacity=".4"/>
+  <rect x="594" y="160" width="628" height="272" rx="24" fill="#101317" stroke="#34404a" stroke-width="2"/>
+  <rect x="594" y="160" width="628" height="4" rx="2" fill="url(#edge)"/>
+  <text x="626" y="187" fill="#9daab5" font-family="monospace" font-size="11" letter-spacing="1.4">WIGGY  /  CHAT PALETTE</text>
+  <image href="chat-palette.png" x="626" y="194" width="576" height="216" preserveAspectRatio="xMidYMid meet" clip-path="url(#screen)"/>
+</svg>

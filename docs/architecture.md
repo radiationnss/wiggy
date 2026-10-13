@@ -21,15 +21,9 @@ or start another sign-in flow. Each user message is an explicit Send. Chat state
 is held in memory, and Clear starts a fresh conversation context.
 
 The bridge requests an ephemeral thread, an empty workspace, no dynamic tools,
-and disabled tool-related runtime features; it also rejects unexpected
-app-server action requests. Local adversarial fixtures verified a chat-only
-response path, and a live one-message smoke test returned a completed reply.
-In that live session, however, app-server reported `unified_exec` enabled and
-27 MCP tools across two server inventories, while reporting zero callable
-connected apps. This inventory does not establish that those tools were
-callable, but it also does not prove the requested isolation. The exact
-configuration and policy response remain a release gate in GitHub; no shared
-Codex daemon settings were changed.
+and disabled tool-related runtime features. It also rejects unexpected
+app-server action requests. These controls are part of Wiggy's chat path; they
+do not replace review of Codex app-server policy or service-side data handling.
 
 ## Screenshot handling
 
@@ -51,9 +45,9 @@ persona/agent selector.
 - Local speech recognition has not been implemented. The approved interaction
   is mouse summon followed by optional listening; listening must be off unless
   the user enables it, and no wake phrase or passive listening is intended.
-- A private Arch package recipe and CI artifact workflow are implemented.
-  Clean desktop acceptance, update behavior, and app-controlled startup remain
-  open in the roadmap; package installation does not enable startup.
+- An Arch package recipe and CI artifact workflow are implemented. Clean
+  desktop acceptance, update behavior, and app-controlled startup remain open
+  in the roadmap; package installation does not enable startup.
 - Native screenshot inference, app-server error recovery, runtime isolation,
   install/upgrade behavior, and hardware/compositor variations need acceptance.
 - App-server and ChatGPT account integration requirements must be checked again
